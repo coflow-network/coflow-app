@@ -1,2 +1,2 @@
 export { default as SignupForm } from './SignupForm.svelte';
-export { signupModel } from './state.js';
+export { signupModel } from './api.js';

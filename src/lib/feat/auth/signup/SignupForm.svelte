@@ -6,7 +6,7 @@
   import { BigButton } from '$lib/kit/buttons';
   import { Spinner } from '$lib/kit/widgets';
 
-  import { signupModel } from './state.js';
+  import { signupModel } from './api.js';
 
   let color = 'tertiary';
   let email = '';

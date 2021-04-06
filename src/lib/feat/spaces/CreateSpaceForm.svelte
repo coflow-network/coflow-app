@@ -8,7 +8,7 @@
   import { BigButton } from '$lib/kit/buttons';
   import { Spinner } from '$lib/kit/widgets';
 
-  import { createSpace, makeSpacesSub } from './state.js';
+  import { createSpace, makeSpacesSub } from './api.js';
 
   export let color = 'primary';
   export let name = '';

@@ -1,5 +1,5 @@
 import { supabase } from '$lib/core';
-import { wrapMachine } from '$lib/kit/state';
+import { wrapMachine } from '$lib/kit/api';
 
 import { invoke, state, state as final, transition, 
   reduce, createMachine } from 'robot3';
