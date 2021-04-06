@@ -19,7 +19,7 @@
       flex justify-start items-center;
   }
 
-  .content { @apply py-6 px-6 rounded-b-xl; }
+  .content { @apply py-6 px-6 rounded-b-xl bg-white; }
 
   h1 {
     @apply block font-bold;
