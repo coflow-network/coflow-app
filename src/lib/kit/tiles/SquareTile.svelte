@@ -1,6 +1,7 @@
 <script>
   import { Emoji } from '$lib/kit/widgets'
 
+  export let url = null;
   export let action = () => {};
   export let color = 'neutral';
 
@@ -26,6 +27,10 @@
 
 </style>
 
-<div class="tile mobile-size hover-effect {styling}" on:click={action}>
-  <slot></slot>
-</div>
+<a sveltekit:prefetch href={url}>
+  <div 
+    class="tile mobile-size hover-effect {styling}"
+    on:click={action}>
+    <slot></slot>
+  </div>
+</a>

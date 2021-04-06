@@ -25,7 +25,7 @@
   onMount(()=>{ requestFetchSpaces(); });
 
   const fetchSpacesContext = fetchSpaces.context;
-</script>`
+</script>
 
 <Grid>
   <CreateSpaceTile action={toggleCreateSpaceModal}/>
