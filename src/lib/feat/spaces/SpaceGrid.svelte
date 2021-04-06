@@ -1,14 +1,14 @@
 <script>
   import { onMount, afterUpdate, tick } from 'svelte';
 
-  import { fetchSpaces, makeSpacesSub } from './state.js'
+  import { fetchSpaces, makeSpacesSub } from './api.js'
 
   import { Modal } from '$lib/kit/forms';
   import { Grid } from '$lib/kit/blocks';
   import { SmallButton } from '$lib/kit/buttons'
-  import { SplitTile } from '$lib/kit/tiles';
  
-  import CreateSpaceTile from './tiles/CreateSpaceTile.svelte'
+  import CreateSpaceTile from './CreateSpaceTile.svelte'
+  import SpaceTile from './SpaceTile.svelte'
   import CreateSpaceForm from './CreateSpaceForm.svelte'
 
   let name;
@@ -25,12 +25,12 @@
   onMount(()=>{ requestFetchSpaces(); });
 
   const fetchSpacesContext = fetchSpaces.context;
-</script>
+</script>`
 
 <Grid>
   <CreateSpaceTile action={toggleCreateSpaceModal}/>
   {#each $fetchSpacesContext.data as space}
-    <SplitTile name={space.name} desc={space.blurb}/>
+    <SpaceTile {space}/>
   {/each}
 </Grid>
 

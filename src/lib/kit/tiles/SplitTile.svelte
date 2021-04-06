@@ -6,6 +6,7 @@
   export let name='Magical Community Space';
   export let desc='Home of the magical sparkly rainbow unicorn poop!';
   export let color='primary';
+  export let action;
 
   import { surface } from '$lib/kit/styles';
   $: surfaceStyling = surface[color];
@@ -21,7 +22,7 @@
   h1 { @apply block font-bold; }
 </style>
 
-<SquareTile>
+<SquareTile {action}>
   <div class="pic mobile-size"></div>
   <div class="blurb mobile-size {surfaceStyling}">
     <h1>{name}</h1>
