@@ -1,7 +1,7 @@
 <script>
   import { Emoji } from '$lib/kit/widgets'
 
-  export let url = null;
+  export let url = "javascript:;";
   export let action = () => {};
   export let color = 'neutral';
 

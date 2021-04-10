@@ -6,7 +6,7 @@
   export let name='Magical Community Space';
   export let desc='Home of the magical sparkly rainbow unicorn poop!';
   export let color='primary';
-  export let url = null;
+  export let url = "javascript:;";
   export let action = () => {};
 
   import { surface } from '$lib/kit/styles';
