@@ -29,7 +29,7 @@ export const fetchSpaces = makeInterface(async (context, event) => {
 });
 
 export const createSpace = makeInterface(async (context, event) => {
-   console.log('requesting with ', JSON.stringify(event))
+  console.log('Creating space: ', event)
   const { data, error } = await supabase
     .from('spaces')
     .insert([{
@@ -37,5 +37,5 @@ export const createSpace = makeInterface(async (context, event) => {
       blurb: event.blurb,
       parent: event.parent
     }]);
-  if ( !error ) { return data; } else { throw error; }
+  if ( !error ) { return data[0]; } else { throw error; }
 });
