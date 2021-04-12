@@ -11,7 +11,7 @@
 
   import { createFlow, makeFlowsSub } from './api.js';
 
-  export let color = 'primary';
+  export let color = 'secondary';
   export let name = '';
   export let blurb = '';
   export let space = null;
@@ -46,7 +46,7 @@
       name="Description:" placeholder="describe the purpose of your flow"
       bind:data={blurb} on:keyup={createOnEnter} {color}
     />
-    <div class="block mt-8 flex flow-x-4">
+    <div class="block mt-8 flex space-x-4">
       <BigButton action={gotoHome} text="cancel" {color}/>
       <BigButton action={requestCreateFlow} text="create" {color}/>
     </div>
