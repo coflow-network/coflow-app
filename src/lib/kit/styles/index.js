@@ -1,9 +1,9 @@
 export let surface = {
-  'primary': 'bg-primary-4 text-primary-1',
-  'secondary': 'bg-secondary-4 text-secondary-1',
-  'tertiary': 'bg-tertiary-4 text-tertiary-1',
-  'warning': 'bg-warning-4 text-warning-1',
-  'error': 'bg-error-4 text-error-1',
+  'primary': 'bg-primary-3 text-white',
+  'secondary': 'bg-secondary-3 text-white',
+  'tertiary': 'bg-tertiary-3 text-white',
+  'warning': 'bg-warning-3 text-white',
+  'error': 'bg-error-3 text-white',
   'neutral': 'bg-neutral-1 text-neutral-4',
 };
 

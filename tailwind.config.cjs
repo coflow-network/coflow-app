@@ -8,7 +8,7 @@ let alias = (color) => {
     2: color[300],
     3: color[500],
     4: color[700],
-	5: color[900],
+	  5: color[900],
 	DEFAULT: color[500],
 	// ...color
   };
@@ -32,8 +32,8 @@ module.exports = {
     theme: {
       extend: {
         colors: {
-         'primary': alias(twColors.lime),
-         'secondary': alias(twColors.cyan),
+         'primary': alias(twColors.cyan),
+         'secondary': alias(twColors.lime),
          'tertiary': alias(twColors.violet),
          'neutral': alias(twColors.blueGray),
          'warning': alias(twColors.amber),
