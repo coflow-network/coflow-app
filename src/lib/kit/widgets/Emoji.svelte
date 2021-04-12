@@ -1,19 +1,25 @@
 <script>
-  import InlineSVG from 'svelte-inline-svg'
+/** 
+  import InlineSVG from 'svelte-inline-svg';
 
-  const openmoji = require('openmoji')
+  import svgToString from '$lib/kit/svg';
+
+  const openmoji = require('openmoji');
+
   const om = openmoji.openmojis
-    
-  let src = om[5].openmoji_images.color.svg
+  let svgSrc = o[5].openmoji_images.color.svg
+
+  let stringSrc = svgToString(svgSrc);
+**/
 </script>
 
 <style>
   .emoji {
-    @apply w-full h-full;
+    @apply block w-full h-full;
   }
 </style>
 
 <p>{src}</p>
 <div class='emoji'>
-	<InlineSVG src={src}/>
+	<InlineSVG src={stringSrc}/>
 </div>

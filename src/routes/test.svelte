@@ -1,13 +1,18 @@
-<style>
-  .mobile-size {
-    width: 100vw;
-    height: 100vw;
+<script>
+  import { svg64 } from 'svg64';
+  import { readFileSync } from 'fs';
+  
+  function svgToString(src) {
+      const svg = readFileSync(src, 'utf-8');
+      const string = svg64(svg);
+      
+      return string;
   }
 
-  .tile {
-    @apply shadow-2xl sm:h-64 sm:w-64 m-4
-      rounded-xl opacity-90;
-  }
-</style>
+  import InlineSVG from 'svelte-inline-svg';
+  
+  let svgSrc = '/test.svg';
+  let stringSrc = svgToString(svgSrc);
+</script>
 
-<div class="mobile-size tile bg-blue-600">poopy</div>
+<InlineSVG src={stringSrc}/>
