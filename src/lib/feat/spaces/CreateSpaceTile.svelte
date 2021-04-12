@@ -9,7 +9,7 @@
 </script>
 
 <style>
-  .filler { @apply block w-full h-full; }
+  .filler { @apply block absolute w-full h-full; }
 
   h1 {
     @apply block font-bold text-8xl text-white h-1/2 w-full
