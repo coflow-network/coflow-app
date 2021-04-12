@@ -22,7 +22,7 @@
   }
 </style>
 
-<SquareTile {color} {action}>
+<SquareTile {color} url="/space/create">
   <div class="filler">
     <h1>+</h1>
     <h2>Create new space</h2>

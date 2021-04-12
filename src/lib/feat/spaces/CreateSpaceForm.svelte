@@ -1,5 +1,6 @@
 <script>
   import { afterUpdate } from 'svelte';
+  import { goto } from '$app/navigation';
 
   import { callOnKeystroke, wait } from '$lib/kit/utils';
 
@@ -14,20 +15,25 @@
   export let name = '';
   export let blurb = '';
   export let parent = null;
-  export let close;
 
   let requestCreateSpace = () => {
     createSpace.request({name, blurb, parent})
   };
-  let createOnEnter = callOnKeystroke(createSpace.request);
-
-  let closeAndReset = () => {
-    createSpace.reset();
-    close();
-  }
 
   const createSpaceStatus = createSpace.status;
   const createSpaceContext = createSpace.context;
+
+  let createOnEnter = callOnKeystroke(createSpace.request);
+
+  let gotoHome = async () => {
+    createSpace.reset();
+    await goto('/');
+  };
+
+  let gotoSpace = () => {
+    goto(`/space/${$createSpaceContext.data.id}`)
+      .then(createSpace.reset());
+  }
 </script>
 
 {#if $createSpaceStatus === 'idle'}
@@ -40,18 +46,19 @@
       name="Description:" placeholder="describe the purpose of your space"
       bind:data={blurb} on:keyup={createOnEnter} {color}
     />
-    <BigButton action={requestCreateSpace} text="Create space" {color}/>
+    <div class="block mt-8 flex space-x-4">
+      <BigButton action={gotoHome} text="cancel" {color}/>
+      <BigButton action={requestCreateSpace} text="create" {color}/>
+    </div>
   </Form>
 {:else if $createSpaceStatus === 'active'}
   <Spinner {color}/>
 {:else if $createSpaceStatus === 'success'}
-  <Box title="{name} space created!" {color}>
-    <p>Your space has been succesfully created!</p>
-    <BigButton action={closeAndReset} text="Go back" {color}/>
-  </Box>
+  <Spinner {color}/>
+  <div style="display: none;">{gotoSpace}</div>
 {:else if $createSpaceStatus === 'failure'}
   <Box title='Space creation error' color="error">
     <p>{$createSpaceContext.error.message}</p>
-    <BigButton action={closeAndReset} text="Go back" {color}/>
+    <BigButton action={gotoHome} text="go back" {color}/>
   </Box>
 {/if}

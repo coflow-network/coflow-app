@@ -9,5 +9,5 @@
 <SplitTile 
   name={space.name}
   desc={space.blurb}
-  url="/s{space.id}"
+  url="/space/{space.id}"
 />

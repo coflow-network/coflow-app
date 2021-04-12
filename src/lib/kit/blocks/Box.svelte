@@ -10,8 +10,9 @@
 
 <style>
   .box {
-    @apply relative block rounded-xl mt-16
-      w-full md:w-96 shadow-2xl;
+    @apply relative block rounded-xl
+      w-full md:w-96 shadow-2xl
+      mt-16 mb-4 ml-4 mr-4;
   }
 
   .header {
