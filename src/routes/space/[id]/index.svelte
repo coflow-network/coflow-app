@@ -4,13 +4,12 @@
     const space = await fetch(`/space/${id}.json`).then((r)=>r.json());
 
     return {
-      props: { id, space }
+      props: { space }
     }
   }
 </script>
 
 <script>
-  export let id;
   export let space;
   
   import { SpaceGrid } from '$lib/feat/spaces';
