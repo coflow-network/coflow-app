@@ -25,14 +25,14 @@
 
   let createOnEnter = callOnKeystroke(createSpace.request);
 
-  let gotoHome = async () => {
+  let gotoHome = () => {
     createSpace.reset();
-    await goto('/');
+    goto('/');
   };
 
   let gotoSpace = () => {
+    createSpace.reset();
     goto(`/space/${$createSpaceContext.data.id}`)
-      .then(createSpace.reset());
   }
 </script>
 

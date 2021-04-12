@@ -9,7 +9,7 @@
   import SpaceTile from './SpaceTile.svelte'
   import CreateSpaceForm from './CreateSpaceForm.svelte'
 
-  let parent = null;
+  export let parent = null;
 
   let requestFetchSpaces = () => {fetchSpaces.request({parent})};
   let fetchOnChangeSub = makeSpacesSub(requestFetchSpaces);
@@ -20,7 +20,7 @@
 </script>
 
 <Grid>
-  <CreateSpaceTile/>
+  <CreateSpaceTile {parent}/>
   {#each $fetchSpacesContext.data as space}
     <SpaceTile {space}/>
   {/each}

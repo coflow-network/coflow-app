@@ -12,12 +12,12 @@
 <script>
   export let id;
   export let space;
+  
+  import { SpaceGrid } from '$lib/feat/spaces';
 </script>
 
 <svelte:head>
   <title>{space.name}</title>
 </svelte:head>
 
-<h1>{space.name}</h1>
-
-<p>{JSON.stringify(space)}</p>
+<SpaceGrid parent={space.id}/>

@@ -3,9 +3,17 @@
 
   export let action = () => {};
   export let color='primary';
+  export let parent = null;
   
   import { surface } from '$lib/kit/styles';
   $: surfaceStyling = surface[color];
+
+  var query = '';
+  if ( parent ) {
+    query = `?p=${parent}`;
+  };
+  
+  let url = `/space/create${query}`;
 </script>
 
 <style>
@@ -22,7 +30,7 @@
   }
 </style>
 
-<SquareTile {color} url="/space/create">
+<SquareTile {color} {url}>
   <div class="filler">
     <h1>+</h1>
     <h2>Create new space</h2>
