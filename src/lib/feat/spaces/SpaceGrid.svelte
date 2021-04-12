@@ -20,10 +20,12 @@
   let requestFetchFlows = () => {fetchFlows.request({space: parent})};
   let refetchFlowsSub = makeFlowsSub(requestFetchFlows);
 
-  onMount(()=>{ 
+  let requestFetch = ()=>{ 
     requestFetchSpaces(); 
     requestFetchFlows();
-  });
+  };
+
+  onMount(requestFetch);
 
   const fetchSpacesContext = fetchSpaces.context;
   const fetchFlowsContext = fetchFlows.context;
