@@ -1,7 +1,9 @@
 <script>
   export let color;
   export let action;
+  export let hover;
   export let text;
+  export let shortcut;
 
   import { surface } from '$lib/kit/styles';
   $: styling = surface[color];
@@ -16,6 +18,10 @@
   }
 </style>
 
-<button class="btn {styling}" on:click|once={action}>
+<button
+  class="btn {styling}"
+  on:click={action} 
+  on:keydown="{event => event.key === {shortcut} && action()}"
+  >
   {text}  
 </button>

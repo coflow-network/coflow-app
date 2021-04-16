@@ -4,7 +4,7 @@ export let surface = {
   'tertiary': 'bg-tertiary-3 text-white',
   'warning': 'bg-warning-3 text-white',
   'error': 'bg-error-3 text-white',
-  'neutral': 'bg-neutral-1 text-neutral-4',
+  'neutral': 'bg-neutral-3 text-white',
 };
 
 export let content = {

@@ -5,7 +5,7 @@
 </script>
   
 <style>
-  main { @apply block flex justify-evenly h-full w-full; }
+  main { @apply block flex justify-evenly h-full w-full fixed; }
 </style>
   
 <TopNav/>
