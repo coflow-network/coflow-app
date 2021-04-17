@@ -37,7 +37,7 @@
     <CreateFlowTile space={parent}/>
   {/if}
   {#each $fetchSpacesContext.data as space}
-    <SpaceTile {space}/>
+    <SpaceTile {space} action={requestFetch}/>
   {/each}
   {#each $fetchFlowsContext.data as flow}
     <FlowTile {flow}/>
