@@ -1,8 +1,13 @@
 <script>
   export let color = 'tertiary';
+  export let action = () => {};
   
+  import { onMount } from 'svelte';
+
   import { surface } from '$lib/kit/styles';
   $: surfaceStyling = surface[color];
+
+  onMount(action());
 </script>
 
 <style>
