@@ -54,8 +54,7 @@
 {:else if $createSpaceStatus === 'active'}
   <Spinner {color}/>
 {:else if $createSpaceStatus === 'success'}
-  <Spinner {color}/>
-  <div style="display: none;">{gotoSpace}</div>
+  <Spinner {color} action={gotoSpace}/>
 {:else if $createSpaceStatus === 'failure'}
   <Box title='Space creation error' color="error">
     <p>{$createSpaceContext.error.message}</p>
