@@ -1,7 +1,8 @@
 <script>
   export let color;
-  export let action;
+  export let action = () => {};
   export let text;
+  export let url = "javascript:;";
 
   import { surface } from '$lib/kit/styles';
   $: styling = surface[color];
@@ -20,6 +21,8 @@
   }
 </style>
 
-<button class="effect {styling}" on:click|once={action}>
-  {text}  
-</button>
+<a href="{url}">
+  <button class="effect {styling}" on:click={action}>
+    {text}  
+  </button>
+</a>

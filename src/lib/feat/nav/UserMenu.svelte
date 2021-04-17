@@ -22,14 +22,14 @@
 	  <SmallButton 
 		text='sign up'
 	    color='tertiary' 
-		action={()=>(window.location.href='signup')} 
+		url='/signup' 
 		/>
 	</li>
 	<li>
 	  <SmallButton 
 		text='sign in'
 	    color='secondary' 
-		action={()=>(window.location.href='signin')} 
+		url='/signin' 
 		/>
 	</li>
 </ul>
