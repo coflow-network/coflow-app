@@ -1,9 +1,8 @@
 <script>
   export let color;
   export let action;
-  export let hover;
   export let text;
-  export let shortcut;
+  export let shortcut = null;
 
   import { surface } from '$lib/kit/styles';
   $: styling = surface[color];
