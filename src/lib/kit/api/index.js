@@ -18,8 +18,9 @@ export const wrapMachine = (machine, initialContext=null) => {
 	return { status, context, send };
 };
 
-export const makeInterface = (query) => {
+export const makeInterface = (name, query) => {
 
+  const interfaceName = `${name}Interface`;
   const initialContext = { data: []};
 
   const queryMachine = createMachine({
