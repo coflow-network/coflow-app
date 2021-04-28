@@ -73,7 +73,6 @@ export function makeRecordStore(table) {
 export function makeQueryStore(table, query, trigger="*") {
 
   let store = writable({state: 'idle', data: []}, ()=>{
-    let sub = makeSub(fetch, trigger);
     return () => {supabase.removeSubscription(sub);}
   });
   let subscribe = store.subscribe
@@ -99,6 +98,8 @@ export function makeQueryStore(table, query, trigger="*") {
         store.set({state: 'error', data: error});
     };
   };
+
+  let sub = makeSub(fetch, trigger);
 
   fetch();
   
