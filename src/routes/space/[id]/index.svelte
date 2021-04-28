@@ -1,17 +1,21 @@
 <script context="module">
-  export async function load({ page, fetch }) {
+  import { makeRecordStore } from '$lib/base';
+  let space = makeRecordStore('spaces');
+  
+  export async function load({ page }) {
     const { id } = page.params;
-    const space = await fetch(`/space/${id}.json`).then((r)=>r.json());
+
+    const result = await space.read(id);
 
     return {
-      props: { space }
+      props: { space: result }
     }
   }
 </script>
 
 <script>
   export let space;
-  
+
   import { SpaceGrid } from '$lib/feat/spaces';
 </script>
 

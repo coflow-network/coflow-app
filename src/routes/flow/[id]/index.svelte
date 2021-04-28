@@ -1,25 +1,25 @@
 <script context="module">
+  import { makeRecordStore } from '$lib/base';
+  let flow = makeRecordStore('flows');
+  
   export async function load({ page, fetch }) {
     const { id } = page.params;
-    const flow = await fetch(`/flow/${id}.json`).then((r)=>r.json());
+    const result = await flow.read(id);
 
     return {
-      props: { flow }
+      props: { flow: result }
     }
   }
 </script>
 
 <script>
   import { writable } from 'svelte/store';
-
-  import { fly } from 'svelte/transition';
-  
-  import { BigButton } from '$lib/kit/buttons'
+  import { fly } from 'svelte/transition';  
+  import { BigButton } from '$lib/ui/buttons'
   
   export let flow;
 
   // test
-
   let cards = [
     { id: 3, text: "hello,", color:"bg-red-600" },
     { id: 1, text: "is", color:"bg-yellow-600" },
@@ -48,7 +48,6 @@
     };
   };
   
-
   function shift(card, focal) {
     let index = cards.indexOf(card);
     if ( index < focal ) {
@@ -61,8 +60,26 @@
       throw Error(`Flow card index error; index is ${index} and current is ${$current}`);
     }
   };
-
 </script>
+
+<svelte:head>
+  <title>{flow.name}</title>
+</svelte:head>
+
+<div class="viewer">
+  <div class="screen">
+  {#each cards as card}
+    <div class="card {card.color} {shift(card, $current)}">
+      <h1 class="font-bold text-5xl text-white">{card.text}</h1>
+    </div>
+  {/each}
+  </div>
+  <div class="controls">
+    <BigButton action={prev} color="neutral" text="&#x276E;"/>
+    <BigButton action={next} color="neutral" text="&#x276F;"/>
+  </div>
+</div>
+
 
 <style>
   .viewer {
@@ -75,7 +92,7 @@
   }
 
   .screen {
-    @apply relative w-full h-full;
+    @apply absolute w-full h-full;
   }
 
   .center {
@@ -95,21 +112,3 @@
   }
 
 </style>
-
-<svelte:head>
-  <title>{flow.name}</title>
-</svelte:head>
-
-<div class="viewer">
-  <div class="screen">
-  {#each cards as card}
-    <div class="card {card.color} {shift(card, $current)}">
-      <h1 class="font-bold text-5xl text-white">{card.text}</h1>
-    </div>
-  {/each}
-  </div>
-  <div class="controls">
-    <BigButton action={prev} color="neutral" text="&#x276E;"/>
-    <BigButton action={next} color="neutral" text="&#x276F;"/>
-  </div>
-</div>

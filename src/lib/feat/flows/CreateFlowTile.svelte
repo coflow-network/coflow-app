@@ -1,16 +1,16 @@
 <script>
-  import { SquareTile } from '$lib/kit/tiles';
+  import { SquareTile } from '$lib/ui/tiles';
 
   export let action = () => {};
   export let color='secondary';
   export let space = null;
   
-  import { surface } from '$lib/kit/styles';
+  import { surface } from '$lib/ui/styles';
   $: surfaceStyling = surface[color];
 
   var query = '';
   if ( space ) {
-    query = `?s=${space}`;
+    query = `?p=${space}`;
   };
   
   let url = `/flow/create${query}`;

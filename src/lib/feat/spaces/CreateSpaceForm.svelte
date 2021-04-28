@@ -1,43 +1,30 @@
 <script>
-  import { afterUpdate } from 'svelte';
   import { goto } from '$app/navigation';
+  import { writable } from 'svelte/store';
 
-  import { callOnKeystroke, wait } from '$lib/kit/utils';
-
-  import { Form, TextField } from '$lib/kit/forms';
-  import { Box } from '$lib/kit/blocks';
-  import { BigButton } from '$lib/kit/buttons';
-  import { Spinner } from '$lib/kit/widgets';
-
-  import { createSpace, makeSpacesSub } from './api.js';
+  import { makeRecordStore } from '$lib/base'
+  import { callOnKeystroke} from '$lib/utils';
+  import { Form, TextField } from '$lib/ui/forms';
+  import { BigButton } from '$lib/ui/buttons';
+  import { Spinner } from '$lib/ui/widgets';
 
   export let color = 'primary';
   export let name = '';
   export let blurb = '';
-  export let parent = null;
+  export let parent = 1;
 
-  let requestCreateSpace = () => {
-    createSpace.request({name, blurb, parent})
+  let space = makeRecordStore('spaces');
+
+  let back = () => {goto(`/space/${parent}`);}
+  let redirectTo = (newSpace) => {
+    return ()=>{goto(`/space/${newSpace.id}`);};
   };
-
-  const createSpaceStatus = createSpace.status;
-  const createSpaceContext = createSpace.context;
-
-  let createOnEnter = callOnKeystroke(createSpace.request);
-
-  let gotoHome = () => {
-    createSpace.reset();
-    goto('/');
-  };
-
-  let gotoSpace = () => {
-    createSpace.reset();
-    goto(`/space/${$createSpaceContext.data.id}`)
-  }
+  let submit = () => {space.create({name, blurb, parent})}
+  let createOnEnter = callOnKeystroke(submit);
 </script>
 
-{#if $createSpaceStatus === 'idle'}
-  <Form title='Create a new space' {color}>
+{#if $space.state === 'idle'}
+  <Form title="create new space" {color}>
     <TextField
       name="Name:" placeholder="enter the name of your space"
       bind:data={name} on:keyup={createOnEnter} required=true {color}
@@ -47,17 +34,17 @@
       bind:data={blurb} on:keyup={createOnEnter} {color}
     />
     <div class="block mt-8 flex space-x-4">
-      <BigButton action={gotoHome} text="cancel" {color}/>
-      <BigButton action={requestCreateSpace} text="create" {color}/>
+      <BigButton action={back} text="go back" {color}/>
+      <BigButton action={submit} text="create space" {color}/>
     </div>
   </Form>
-{:else if $createSpaceStatus === 'active'}
+{:else if $space.state === 'pending'}
   <Spinner {color}/>
-{:else if $createSpaceStatus === 'success'}
-  <Spinner {color} action={gotoSpace}/>
-{:else if $createSpaceStatus === 'failure'}
-  <Box title='Space creation error' color="error">
-    <p>{$createSpaceContext.error.message}</p>
-    <BigButton action={gotoHome} text="go back" {color}/>
+{:else if $space.state === 'success'}
+  <Spinner {color} action={redirectTo($space.data)}/>
+{:else if $space.state === 'error'}
+  <Box title="Error" color="error">
+    <p>{error.message}</p>
+    <BigButton action={back} text="go back" {color}/>
   </Box>
 {/if}

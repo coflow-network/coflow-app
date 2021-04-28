@@ -1,17 +1,18 @@
 <script context="module">
   export async function load({ page }) {
-    let space = page.query.get('s');
+    let parent = page.query.get('p');
 
     return {
-      props: { space }
+      props: { parent }
     };
   };
 </script>
 
 <script>
-  export let space;
+  
+  export let parent;
   
   import { CreateFlowForm } from '$lib/feat/flows';
 </script>
 
-<CreateFlowForm {space}/>
+<CreateFlowForm {parent}/>

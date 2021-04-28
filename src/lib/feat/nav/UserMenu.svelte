@@ -1,14 +1,7 @@
 <script>
-  import { signinModel } from '$lib/feat/auth';
-  import { SmallButton } from '$lib/kit/buttons';
+  import { session } from '$lib/feat/auth';
 
-  const { 
-    status: signinStatus, 
-    context: signinContext, 
-    send: signinSend 
-  } = signinModel;
-
-  let requestSignout = ()=>(signinSend('signoutRequest'));
+  import { SmallButton } from '$lib/ui/buttons';
 </script>
 
 <style>
@@ -16,7 +9,7 @@
   li { @apply block float-right; }
 </style>
 
-{#if $signinStatus === ('signedOut' || 'signinFailure')}
+{#if $session.state === ('signed-out' || 'error')}
 <ul>
 	<li>
 	  <SmallButton 
@@ -33,17 +26,17 @@
 		/>
 	</li>
 </ul>
-{:else if $signinStatus === ('signedIn' || 'signoutFailure')}
+{:else if $session.state === ('signed-in')}
 <ul>
-	<li>{$signinContext.user.email}</li>
+	<li><span class="text-neutral-3">{$session.data.user.email}</span></li>
 	<li>
 	  <SmallButton 
 		text='sign out'
 	    color='warning' 
-		action={requestSignout} 
+		action={()=>{session.signout()}} 
 		/>
 	</li>
 </ul>
 {:else}
-<p>{$signinStatus}</p>
+<p>{$session.state}</p>
 {/if}

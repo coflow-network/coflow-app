@@ -1,6 +1,6 @@
 
 <script>
-    import { SplitTile } from '$lib/kit/tiles';
+    import { SplitTile } from '$lib/ui/tiles';
     
     export let space;
     export let action = () => {};
