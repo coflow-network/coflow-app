@@ -47,11 +47,11 @@ export function makeRecordStore(table) {
     };
   };
 
-  async function deleteRecord(record) {
+  async function deleteRecord(id) {
     store.update(s=>{return {...s, state: 'pending'}});
     const { data, error } = await supabase
       .delete()
-      .match({id: record.id})
+      .match({id})
     if ( !error ) {
         store.set({state: 'success', data: data[0]});
         return data[0];
