@@ -1,43 +1,30 @@
 <script>
-  import { afterUpdate } from 'svelte';
   import { goto } from '$app/navigation';
+  import { writable } from 'svelte/store';
 
-  import { callOnKeystroke, wait } from '$lib/kit/utils';
-
-  import { Form, TextField } from '$lib/kit/forms';
-  import { Box } from '$lib/kit/blocks';
-  import { BigButton } from '$lib/kit/buttons';
-  import { Spinner } from '$lib/kit/widgets';
-
-  import { createFlow, makeFlowsSub } from './api.js';
+  import { makeRecordStore } from '$lib/base'
+  import { callOnKeystroke} from '$lib/utils';
+  import { Form, TextField } from '$lib/ui/forms';
+  import { BigButton } from '$lib/ui/buttons';
+  import { Spinner } from '$lib/ui/widgets';
 
   export let color = 'secondary';
   export let name = '';
   export let blurb = '';
-  export let space = null;
+  export let parent = 1;
 
-  let requestCreateFlow = () => {
-    createFlow.request({name, blurb, space})
+  let flow = makeRecordStore('flows');
+
+  let back = () => {goto(`/space/${parent}`);}
+  let redirectTo = (newFlow) => {
+    return ()=>{goto(`/flow/${newFlow.id}`);};
   };
-
-  const createFlowStatus = createFlow.status;
-  const createFlowContext = createFlow.context;
-
-  let createOnEnter = callOnKeystroke(createFlow.request);
-
-  let gotoHome = () => {
-    createFlow.reset();
-    goto('/');
-  };
-
-  let gotoFlow = () => {
-    createFlow.reset();
-    goto(`/flow/${$createFlowContext.data.id}`)
-  }
+  let submit = () => {flow.create({name, blurb, parent})}
+  let createOnEnter = callOnKeystroke(submit);
 </script>
 
-{#if $createFlowStatus === 'idle'}
-  <Form title='Create a new flow' {color}>
+{#if $flow.state === 'idle'}
+  <Form title="create new flow" {color}>
     <TextField
       name="Name:" placeholder="enter the name of your flow"
       bind:data={name} on:keyup={createOnEnter} required=true {color}
@@ -46,19 +33,18 @@
       name="Description:" placeholder="describe the purpose of your flow"
       bind:data={blurb} on:keyup={createOnEnter} {color}
     />
-    <div class="block mt-8 flex space-x-4">
-      <BigButton action={gotoHome} text="cancel" {color}/>
-      <BigButton action={requestCreateFlow} text="create" {color}/>
+    <div class="block mt-8 flex flow-x-4 space-x-4">
+      <BigButton action={back} text="go back" {color}/>
+      <BigButton action={submit} text="create flow" {color}/>
     </div>
   </Form>
-{:else if $createFlowStatus === 'active'}
-  <Spinner {color}/>
-{:else if $createFlowStatus === 'success'}
-  <Spinner {color}/>
-  <div style="display: none;">{gotoFlow}</div>
-{:else if $createFlowStatus === 'failure'}
-  <Box title='Flow creation error' color="error">
-    <p>{$createFlowContext.error.message}</p>
-    <BigButton action={gotoHome} text="go back" {color}/>
-  </Box>
+{:else if $flow.state === 'pending'}
+    <Spinner {color}/>
+{:else if $flow.state === 'success'}
+    <Spinner {color} action={redirectTo($flow.data)}/>
+{:else if $flow.state === 'error'}
+    <Box title="Error" color="error">
+      <p>{error.message}</p>
+      <BigButton action={back} text="go back" {color}/>
+    </Box>
 {/if}

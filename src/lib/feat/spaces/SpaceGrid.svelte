@@ -1,34 +1,21 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onDestroy } from 'svelte';
 
-  import { Grid } from '$lib/kit/blocks';
-  import { SmallButton } from '$lib/kit/buttons'
+  import { makeQueryStore } from '$lib/base'
+  
+  import { Grid } from '$lib/ui/blocks';
  
-  import { fetchSpaces, makeSpacesSub } from './api.js'
   import CreateSpaceTile from './CreateSpaceTile.svelte'
   import SpaceTile from './SpaceTile.svelte'
   import CreateSpaceForm from './CreateSpaceForm.svelte'
 
-  import { fetchFlows, makeFlowsSub } from '$lib/feat/flows/api'
   import { CreateFlowTile, FlowTile } from '$lib/feat/flows'
 
-  export let parent = null;
+  export let parent = 1;
 
-  let requestFetchSpaces = () => {fetchSpaces.request({parent})};
-  let refetchSpacesSub = makeSpacesSub(requestFetchSpaces);
-
-  let requestFetchFlows = () => {fetchFlows.request({space: parent})};
-  let refetchFlowsSub = makeFlowsSub(requestFetchFlows);
-
-  let requestFetch = ()=>{ 
-    requestFetchSpaces(); 
-    requestFetchFlows();
-  };
-
-  onMount(requestFetch);
-
-  const fetchSpacesContext = fetchSpaces.context;
-  const fetchFlowsContext = fetchFlows.context;
+  let fetchChildren = `parent.eq.${parent}`
+  let spaces = makeQueryStore('spaces', fetchChildren);
+  let flows = makeQueryStore('flows', fetchChildren);
 </script>
 
 <Grid>
@@ -36,10 +23,10 @@
   {#if parent}
     <CreateFlowTile space={parent}/>
   {/if}
-  {#each $fetchSpacesContext.data as space}
-    <SpaceTile {space} action={requestFetch}/>
+  {#each $spaces.data as space}
+    <SpaceTile {space}/>
   {/each}
-  {#each $fetchFlowsContext.data as flow}
+  {#each $flows.data as flow}
     <FlowTile {flow}/>
   {/each}
 </Grid>

@@ -1,11 +1,11 @@
 <script>
-  import { SquareTile } from '$lib/kit/tiles';
+  import { SquareTile } from '$lib/ui/tiles';
 
   export let action = () => {};
   export let color='primary';
   export let parent = null;
   
-  import { surface } from '$lib/kit/styles';
+  import { surface } from '$lib/ui/styles';
   $: surfaceStyling = surface[color];
 
   var query = '';

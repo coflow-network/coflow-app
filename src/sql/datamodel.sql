@@ -18,9 +18,11 @@ create table spaces (
     ,doc jsonb
 );
 
+insert into spaces ( name ) values ( 'Coflow Network Home' );
+
 create table flows (
     id serial primary key
-    ,space int not null references spaces on delete cascade
+    ,parent int not null references spaces on delete cascade
     ,name varchar(32) not null
     ,blurb varchar(320)
     ,doc jsonb
@@ -28,7 +30,7 @@ create table flows (
 
 create table cards (
     id serial primary key
-    ,flow int not null references flows on delete cascade
+    ,parent int not null references flows on delete cascade
     ,name varchar(32) not null
     ,blurb varchar(320)
     ,doc jsonb
