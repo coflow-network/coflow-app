@@ -6,4 +6,4 @@
 	<title>sign in</title>
 </svelte:head>
 
-<SigninForm/>
+<SigninForm />

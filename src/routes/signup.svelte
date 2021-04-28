@@ -6,4 +6,4 @@
 	<title>sign up</title>
 </svelte:head>
 
-<SignupForm/>
+<SignupForm />

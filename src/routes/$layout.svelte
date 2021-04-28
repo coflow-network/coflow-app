@@ -1,15 +1,17 @@
 <script>
-	import "../global.css";
-  
-  import { TopNav } from '$lib/feat/nav';
-</script>
-  
-<style>
-  main { @apply block flex justify-evenly h-full w-full relative; }
-</style>
+	import '../global.css';
 
-<TopNav/>
-  
+	import { TopNav } from '$lib/feat/nav';
+</script>
+
+<TopNav />
+
 <main>
-  <slot></slot>
+	<slot />
 </main>
+
+<style>
+	main {
+		@apply block flex justify-evenly h-full w-full relative;
+	}
+</style>

@@ -1,4 +1,4 @@
-const sveltePreprocess = require("svelte-preprocess");
+const sveltePreprocess = require('svelte-preprocess');
 const netlify = require('@sveltejs/adapter-netlify');
 const pkg = require('./package.json');
 
@@ -7,16 +7,15 @@ module.exports = {
 	preprocess: [
 		sveltePreprocess({
 			defaults: {
-				style: "postcss",
+				style: 'postcss'
 			},
 			postcss: true
-		}),
+		})
 	],
 	kit: {
 		adapter: netlify(),
-		
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte',
 
+		// hydrate the <div id="svelte"> element in src/app.html
+		target: '#svelte'
 	}
 };

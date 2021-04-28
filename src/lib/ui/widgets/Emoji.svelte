@@ -1,5 +1,5 @@
 <script>
-/** 
+	/** 
   import InlineSVG from 'svelte-inline-svg';
 
   import svgToString from '$lib/ui/svg';
@@ -13,13 +13,13 @@
 **/
 </script>
 
-<style>
-  .emoji {
-    @apply block w-full h-full;
-  }
-</style>
-
 <p>{src}</p>
-<div class='emoji'>
-	<InlineSVG src={stringSrc}/>
+<div class="emoji">
+	<InlineSVG src={stringSrc} />
 </div>
+
+<style>
+	.emoji {
+		@apply block w-full h-full;
+	}
+</style>
