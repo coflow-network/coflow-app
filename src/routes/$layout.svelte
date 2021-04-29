@@ -1,5 +1,5 @@
 <script>
-	import '../global.css';
+	import '../app.postcss';
 
 	import { TopNav } from '$lib/feat/nav';
 </script>
