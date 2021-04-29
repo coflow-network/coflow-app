@@ -4,7 +4,7 @@
 
 	export async function load({ page, fetch }) {
 		const { id } = page.params;
-		const result = await flow.read(id);
+		const result = await flow.read({id});
 
 		return {
 			props: { flow: result }

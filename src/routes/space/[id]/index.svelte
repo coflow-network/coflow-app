@@ -5,7 +5,7 @@
 	export async function load({ page }) {
 		const { id } = page.params;
 
-		const result = await space.read(id);
+		const result = await space.read({id});
 
 		return {
 			props: { space: result }

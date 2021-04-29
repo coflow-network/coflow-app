@@ -18,11 +18,11 @@ export function makeRecordStore(table) {
 		}
 	}
 
-	async function readRecord(id) {
+	async function readRecord(record) {
 		store.update((s) => {
 			return { ...s, state: 'pending' };
 		});
-		const { data, error } = await supabase.from(table).select().match({ id });
+		const { data, error } = await supabase.from(table).select().match(record);
 		if (!error) {
 			store.set({ state: 'success', data: data[0] });
 			return data[0];
@@ -35,7 +35,7 @@ export function makeRecordStore(table) {
 		store.update((s) => {
 			return { ...s, state: 'pending' };
 		});
-		const { data, error } = await supabase.from(table).update(record).match({ id: record.id });
+		const { data, error } = await supabase.from(table).update(record).match(record);
 		if (!error) {
 			store.set({ state: 'success', data: data[0] });
 			return data[0];
@@ -44,11 +44,11 @@ export function makeRecordStore(table) {
 		}
 	}
 
-	async function deleteRecord(id) {
+	async function deleteRecord(record) {
 		store.update((s) => {
 			return { ...s, state: 'pending' };
 		});
-		const { data, error } = await supabase.delete().match({ id });
+		const { data, error } = await supabase.delete().match(record);
 		if (!error) {
 			store.set({ state: 'success', data: data[0] });
 			return data[0];
