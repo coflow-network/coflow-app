@@ -1,5 +1,5 @@
 <script>
-	import { SquareTile } from '$lib/ui/tiles';
+	import SquareTile from './SquareTile.svelte';
 
     export let icon;
     export let name;
