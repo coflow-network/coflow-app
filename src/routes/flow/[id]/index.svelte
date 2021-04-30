@@ -32,10 +32,6 @@
 
 	let current = writable(0);
 
-	current.subscribe((value) => {
-		console.log(value);
-	});
-
 	function next() {
 		if ($current + 1 < cards.length) {
 			current.update((c) => c + 1);
@@ -67,13 +63,11 @@
 </svelte:head>
 
 <div class="viewer">
-	<div class="screen">
-		{#each cards as card}
-			<div class="card {card.color} {shift(card, $current)}">
-				<h1 class="font-bold text-5xl text-white">{card.text}</h1>
-			</div>
-		{/each}
-	</div>
+	{#each cards as card}
+		<div class="card {card.color} {shift(card, $current)}">
+			<h1 class="font-bold text-5xl text-white">{card.text}</h1>
+		</div>
+	{/each}
 	<div class="controls">
 		<BigButton action={prev} color="neutral" text="&#x276E;" />
 		<BigButton action={next} color="neutral" text="&#x276F;" />
@@ -82,16 +76,17 @@
 
 <style>
 	.viewer {
-		@apply relative h-full w-full flex flex-col;
+		@apply w-full h-full overflow-hidden;
 	}
 
 	.card {
-		@apply absolute inset-0 w-screen h-full 
-    flex items-center justify-center text-5xl;
+		@apply fixed h-full w-full
+        flex items-center justify-center text-5xl;
 	}
 
-	.screen {
-		@apply absolute w-full h-full;
+	.controls {
+		@apply absolute z-10 bottom-2 left-6 right-6 h-32 
+		flex flex-row justify-between;
 	}
 
 	.center {
@@ -106,7 +101,4 @@
 		@apply transition ease-in-out duration-1000 transform translate-x-full;
 	}
 
-	.controls {
-		@apply bottom-0 w-full h-32 flex flex-row p-2 space-x-4;
-	}
 </style>

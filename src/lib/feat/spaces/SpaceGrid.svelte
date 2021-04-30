@@ -18,7 +18,7 @@
 	let flows = makeQueryStore('flows', fetchChildren);
 </script>
 
-<Grid>
+<Grid class="grid">
 	<CreateSpaceTile {parent} />
 	{#if parent}
 		<CreateFlowTile space={parent} />
@@ -30,3 +30,10 @@
 		<FlowTile {flow} />
 	{/each}
 </Grid>
+
+<style>
+	.grid {
+		@apply overflow-scroll;
+	}
+</style>
+

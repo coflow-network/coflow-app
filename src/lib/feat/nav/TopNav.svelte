@@ -10,7 +10,6 @@
 
 <style>
 	nav {
-		@apply font-bold px-0 py-2
-      flex justify-between items-center;
+		@apply font-bold px-0 py-2 flex justify-between items-center;
 	}
 </style>

@@ -7,11 +7,11 @@
 <TopNav />
 
 <main>
-	<slot />
+  <slot />
 </main>
 
 <style>
 	main {
-		@apply block flex justify-evenly h-full w-full relative;
+		@apply w-full h-auto;
 	}
 </style>
