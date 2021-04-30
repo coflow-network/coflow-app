@@ -1,7 +1,9 @@
 <script>
-	import { SplitTile } from '$lib/ui/tiles';
+	import { IconTile } from '$lib/ui/tiles';
 
 	export let flow;
+
+	let color = "secondary";
 </script>
 
-<SplitTile name={flow.name} desc={flow.blurb} url="/flow/{flow.id}" color="secondary" />
+<IconTile url="/flow/{flow.id}" {...flow} {color}/>

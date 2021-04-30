@@ -17,8 +17,8 @@
 
 <style>
 	.mobile-size {
-		width: 100vw;
-		height: 100vw;
+		width: 90vw;
+		height: 90vw;
 	}
 
 	.tile {
