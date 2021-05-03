@@ -6,4 +6,4 @@
 	let color = "primary";
 </script>
 
-<IconTile url="/space/space.id}" {...space} {color}/>
+<IconTile url="/space/{space.id}" {...space} {color} />
