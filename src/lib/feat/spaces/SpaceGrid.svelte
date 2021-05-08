@@ -21,13 +21,13 @@
 <Grid class="grid">
 	<CreateSpaceTile {parent} />
 	{#if parent}
-		<CreateFlowTile space={parent} />
+	<CreateFlowTile space={parent} />
 	{/if}
 	{#each $spaces.data as space}
-		<SpaceTile {space} />
+	<SpaceTile {space} />
 	{/each}
 	{#each $flows.data as flow}
-		<FlowTile {flow} />
+	<FlowTile {flow} />
 	{/each}
 </Grid>
 
@@ -36,4 +36,3 @@
 		@apply overflow-scroll;
 	}
 </style>
-
