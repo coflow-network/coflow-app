@@ -2,12 +2,13 @@
 	import { makeRecordStore } from '$lib/base';
 	let flow = makeRecordStore('flows');
 
-	export async function load({ page, fetch }) {
+	export async function load({ page }) {
 		const { id } = page.params;
-		const result = await flow.read({id});
+
+		const result = await flow.read({ id });
 
 		return {
-			props: { flow: result }
+			props: { flow: result.data }
 		};
 	}
 </script>
@@ -64,9 +65,9 @@
 
 <div class="viewer">
 	{#each cards as card}
-		<div class="card {card.color} {shift(card, $current)}">
-			<h1 class="font-bold text-5xl text-white">{card.text}</h1>
-		</div>
+	<div class="card {card.color} {shift(card, $current)}">
+		<h1 class="font-bold text-5xl text-white">{card.text}</h1>
+	</div>
 	{/each}
 	<div class="controls">
 		<BigButton action={prev} color="neutral" text="&#x276E;" />
@@ -80,13 +81,11 @@
 	}
 
 	.card {
-		@apply fixed h-full w-full
-        flex items-center justify-center text-5xl;
+		@apply fixed h-full w-full flex items-center justify-center text-5xl;
 	}
 
 	.controls {
-		@apply absolute z-10 bottom-2 left-6 right-6 h-32 
-		flex flex-row justify-between;
+		@apply absolute z-10 bottom-2 left-6 right-6 h-32 flex flex-row justify-between;
 	}
 
 	.center {
@@ -100,5 +99,4 @@
 	.right {
 		@apply transition ease-in-out duration-1000 transform translate-x-full;
 	}
-
 </style>

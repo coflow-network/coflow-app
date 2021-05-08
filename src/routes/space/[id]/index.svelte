@@ -2,13 +2,14 @@
 	import { makeRecordStore } from '$lib/base';
 	let space = makeRecordStore('spaces');
 
-	export async function load({ page }) {
+	export async function load({ page, fetch }) {
 		const { id } = page.params;
 
-		const result = await space.read({id});
+		const result = await space.read({ id });
 
+		console.log(result)
 		return {
-			props: { space: result }
+			props: { space: result.data }
 		};
 	}
 </script>

@@ -13,9 +13,9 @@
 
 	export let parent = 1;
 
-	let fetchChildren = `parent.eq.${parent}`;
-	let spaces = makeQueryStore('spaces', fetchChildren);
-	let flows = makeQueryStore('flows', fetchChildren);
+	$: fetchChildren = `parent.eq.${parent}`;
+	$: spaces = makeQueryStore('spaces', fetchChildren);
+	$: flows = makeQueryStore('flows', fetchChildren);
 </script>
 
 <Grid class="grid">
