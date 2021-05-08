@@ -1,5 +1,5 @@
 import { supabase } from './client.js';
-import { makeConstructors } from './temp`.js';
+import { makeConstructors } from './temp.js';
 //import { makeConstructors } from 'supasvelte';
 
 export const {
