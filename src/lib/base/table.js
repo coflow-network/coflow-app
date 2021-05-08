@@ -72,7 +72,6 @@ export function makeQueryStore(table, query, trigger = '*') {
 			supabase.removeSubscription(sub);
 		};
 	});
-	let subscribe = store.subscribe;
 
 	function makeSub(callback, trigger = '*') {
 		const sub = supabase.from(table).on(trigger, callback).subscribe();
@@ -86,10 +85,10 @@ export function makeQueryStore(table, query, trigger = '*') {
 		const { data, error } = await supabase.from(table).select().or(query);
 		if (!error) {
 			store.set({ state: 'success', data: data });
-			return data;
 		} else {
 			store.set({ state: 'error', data: error });
 		}
+		return { data, error };
 	}
 
 	let sub = makeSub(fetch, trigger);
@@ -97,7 +96,7 @@ export function makeQueryStore(table, query, trigger = '*') {
 	fetch();
 
 	return {
-		subscribe,
+		subscribe: store.subscribe,
 		fetch
 	};
 }
