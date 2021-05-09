@@ -25,4 +25,8 @@
 	import { FlowViewer } from '$lib/feat/flows';
 </script>
 
+<script>
+	export let flow;
+</script>
+
 <FlowViewer {flow} {cards} />

@@ -1,35 +1,22 @@
 <script>
-    import { writable } from 'svelte/store';
+    import FlowController from './FlowController.svelte';
+    import { state } from './stores.js';
+
     import { fly } from 'svelte/transition';
-    import { BigButton } from '$lib/ui/buttons';
 
     export let flow;
     export let cards;
 
-    let current = writable(0);
-
-    function next() {
-        if ($current + 1 < cards.length) {
-            current.update((c) => c + 1);
-        }
-    }
-
-    function prev() {
-        if ($current > 0) {
-            current.update((c) => c - 1);
-        }
-    }
-
     function shift(card, focal) {
         let index = cards.indexOf(card);
         if (index < focal) {
-            return 'left';
+            return 'up';
         } else if (index === focal) {
-            return 'center';
+            return 'focus';
         } else if (index > focal) {
-            return 'right';
+            return 'down';
         } else {
-            throw Error(`Flow card index error; index is ${index} and current is ${$current}`);
+            throw Error(`Flow card index error; index is ${index} and current is ${$state}`);
         }
     }
 </script>
@@ -40,14 +27,11 @@
 
 <div class="viewer">
     {#each cards as card}
-    <div class="card {card.color} {shift(card, $current)}">
+    <div class="card {card.color} {shift(card, $state)}">
         <h1 class="font-bold text-5xl text-white">{card.text}</h1>
     </div>
     {/each}
-    <div class="controls">
-        <BigButton action={prev} color="neutral" text="&#x276E;" />
-        <BigButton action={next} color="neutral" text="&#x276F;" />
-    </div>
+    <FlowController {cards} />
 </div>
 
 <style>
@@ -59,19 +43,15 @@
         @apply fixed h-full w-full flex items-center justify-center text-5xl;
     }
 
-    .controls {
-        @apply absolute z-10 bottom-2 left-6 right-6 h-32 flex flex-row justify-between;
-    }
-
-    .center {
+    .focus {
         @apply transition ease-in-out duration-1000 transform translate-x-0;
     }
 
-    .left {
-        @apply transition ease-in-out duration-1000 transform -translate-x-full;
+    .up {
+        @apply transition ease-in-out duration-1000 transform -translate-y-full;
     }
 
-    .right {
-        @apply transition ease-in-out duration-1000 transform translate-x-full;
+    .down {
+        @apply transition ease-in-out duration-1000 transform translate-y-full;
     }
 </style>
