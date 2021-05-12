@@ -26,6 +26,6 @@
 
 <style>
     .controls {
-        @apply absolute z-10 bottom-4 right-4 w-16 h-32 flex flex-col justify-between;
+        @apply absolute z-10 top-4 bottom-4 right-4 w-16 flex flex-col place-content-end gap-y-4;
     }
 </style>
